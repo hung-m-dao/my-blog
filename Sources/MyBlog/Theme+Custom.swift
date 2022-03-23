@@ -24,7 +24,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: index, on: context.site),
             .body {
-                SiteHeader(context: context, selectedSelectionID: nil)
+                SiteHeader(context: context, selectedSelectionID: nil, location: index)
                 Wrapper {
                     Paragraph(context.site.description)
                         .class("description")
@@ -48,7 +48,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: section, on: context.site),
             .body {
-                SiteHeader(context: context, selectedSelectionID: section.id)
+                SiteHeader(context: context, selectedSelectionID: section.id, location: section)
                 Wrapper {
                     H1(section.title)
                     ItemList(items: section.items, site: context.site)
@@ -66,7 +66,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .body(
                 .class("item-page"),
                 .components {
-                    SiteHeader(context: context, selectedSelectionID: item.sectionID)
+                    SiteHeader(context: context, selectedSelectionID: item.sectionID, location: item)
                     Wrapper {
                         Article {
                             Div(item.content.body).class("content")
@@ -86,7 +86,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: page, on: context.site),
             .body {
-                SiteHeader(context: context, selectedSelectionID: nil)
+                SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper(page.body)
                 SiteFooter()
             }
@@ -99,7 +99,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: page, on: context.site),
             .body {
-                SiteHeader(context: context, selectedSelectionID: nil)
+                SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper {
                     H1("Browse all tags")
                     List(page.tags.sorted()) { tag in
@@ -123,7 +123,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: page, on: context.site),
             .body {
-                SiteHeader(context: context, selectedSelectionID: nil)
+                SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper {
                     H1 {
                         Text("Tagged with ")
@@ -161,13 +161,13 @@ private struct Wrapper: ComponentContainer {
 private struct SiteHeader<Site: Website>: Component {
     var context: PublishingContext<Site>
     var selectedSelectionID: Site.SectionID?
-
+    var location: Location
     var body: Component {
         Header {
             Wrapper {
-                Link(context.site.name, url: "/")
+                Link("/home", url: "/")
                     .class("site-name")
-
+                Span(location.path.absoluteString).class("site-path")
                 if Site.SectionID.allCases.count > 1 {
                     navigation
                 }
@@ -225,8 +225,7 @@ private struct SiteFooter: Component {
                 Link("Publish", url: "https://github.com/johnsundell/publish")
             }
             Paragraph {
-                Text("My ")
-                Link("Github", url: "https://github.com/hung-m-dao")
+                Link("Github repo", url: "https://github.com/hung-m-dao/my-blog")
             }
         }
     }

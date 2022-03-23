@@ -4,6 +4,7 @@
 *  MIT license, see LICENSE file for details
 */
 @import url("https://use.typekit.net/zjo6pqv.css");
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@700&display=swap');
 
 * {
     margin: 0;
@@ -23,6 +24,7 @@ blockquote {
     padding: 10px 15px;
     margin: 15px 0px;
     color: #797593;
+    font-family: 'open-sans', sans-serif;
 }
 
 blockquote > :first-child {
@@ -42,31 +44,26 @@ blockquote > :last-child {
 }
 
 header {
-    background-color: #f2e9e1;
+    background-color: #26233a;
 }
 
 header .wrapper {
     padding-top: 30px;
     padding-bottom: 30px;
-    text-align: center;
-}
-
-a:link {
-  text-decoration: none;
-}
-
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 header .site-name {
     font-size: 1.5em;
-    color: #575279;
+    color: #ea9a97;
     font-weight: bold;
+    font-family: 'Red Hat Mono', monospace;
+}
+
+header .site-path {
+    font-size: 1.5em;
+    color: #ebbcba;
+    font-weight: bold;
+    font-family: 'Red Hat Mono', monospace;
 }
 
 nav {
@@ -102,6 +99,18 @@ p {
 
 a {
     color: inherit;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .description {

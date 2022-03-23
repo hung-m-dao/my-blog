@@ -15,7 +15,7 @@ struct MyBlog: Website {
 
     // Update these properties to configure your website:
     var url = URL(string: "https://hung-m-dao.github.io/")!
-    var name = "Hung Dao's space"
+    var name = "My blog"
     var description = "Hello! I'm Hung, and this is my personal space."
     var language: Language { .english }
     var imagePath: Path? { nil }
