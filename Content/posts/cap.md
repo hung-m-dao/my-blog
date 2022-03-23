@@ -1,6 +1,6 @@
 ---
 date: 2022-03-23 16:55
-description: "Khi thiết kế hệ thống phân tán (distributed system) có một định lý nền tảng quan trọng đó là CAP theorem. Trong bài viết này chúng ta cùng tìm hiểu về các khía cạnh này cuả định lý này "
+description: Khi thiết kế hệ thống phân tán (distributed system) có một định lý nền tảng quan trọng đó là CAP theorem. Trong bài viết này chúng ta cùng tìm hiểu về các khía cạnh này của định lý này 
 tags: Vietnamese, Distributed-system
 ---
 

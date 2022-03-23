@@ -3,13 +3,13 @@
 *  Copyright (c) John Sundell 2019
 *  MIT license, see LICENSE file for details
 */
-@import url("https://use.typekit.net/zjo6pqv.css");
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'lato', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 body {
