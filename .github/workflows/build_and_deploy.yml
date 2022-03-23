@@ -7,16 +7,17 @@ on:
       - closed
 
 jobs:
-  name: Deploy
+  deploy:
+    name: Deploy
 
-  runs-on: macOS-latest
-  steps:
-    #Checkout branch
-      uses: actions/checkout@v2
-    - name: Install Publish
-      run: brew install publish
-    - uses: webfactory/ssh-agent@v0.5.4
-              with:
-                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Build and deploy
-      run: publish deploy
+    runs-on: macOS-latest
+    steps:
+      #Checkout branch
+        uses: actions/checkout@v2
+      - name: Install Publish
+        run: brew install publish
+      - uses: webfactory/ssh-agent@v0.5.4
+                with:
+                    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Build and deploy
+        run: publish deploy
