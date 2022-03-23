@@ -1,9 +1,5 @@
 name: CI
-on:
-  push:
-  pull_request_target:
-    types:
-      - closed
+on: push
 jobs:
   deploying:
     if: github.event.pull_request_target.merged == true || github.event_name == 'push'
