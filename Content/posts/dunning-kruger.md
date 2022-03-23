@@ -1,7 +1,7 @@
 ---
 date: 2022-03-23 10:55
 description: "You're not as smart as you think you are"
-tags: first, article
+tags: til, non-tech
 ---
 # Dunning-Kruger effect
 

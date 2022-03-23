@@ -36,8 +36,16 @@ header .wrapper {
     text-align: center;
 }
 
-header a {
-    text-decoration: none;
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 header .site-name {
