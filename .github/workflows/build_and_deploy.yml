@@ -1,15 +1,13 @@
 name: CI
-
 on:
   push:
   pull_request_target:
     types:
       - closed
-
 jobs:
   deploying:
-    name: Deploying
-    runs-on: macOS-latest
+    if: github.event.pull_request_target.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
     steps:
       #Checkout branch
         uses: actions/checkout@v2
