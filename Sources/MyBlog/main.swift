@@ -16,10 +16,10 @@ struct MyBlog: Website {
     // Update these properties to configure your website:
     var url = URL(string: "https://hung-m-dao.github.io/")!
     var name = "Hung Dao's space"
-    var description = "Hello! I'm Hung!"
+    var description = "Hello! I'm Hung, and this is my personal space"
     var language: Language { .english }
     var imagePath: Path? { nil }
 }
 
 // This will generate your website using the built-in Foundation theme:
-try MyBlog().publish(withTheme: .custom)
+try MyBlog().publish(withTheme: .custom, deployedUsing: .gitHub("hung-m-dao/hung-m-dao.github.io"))
