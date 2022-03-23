@@ -7,9 +7,7 @@ on:
       - closed
 
 jobs:
-  deploy:
-    name: Deploy
-
+  mac:
     runs-on: macOS-latest
     steps:
       #Checkout branch
