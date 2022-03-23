@@ -3,19 +3,34 @@
 *  Copyright (c) John Sundell 2019
 *  MIT license, see LICENSE file for details
 */
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&display=swap');
+@import url("https://use.typekit.net/zjo6pqv.css");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: 'lato', sans-serif;
 }
 
 body {
     background: #faf4ed;
     color: #575279;
     text-align: center;
+}
+
+blockquote {
+    border-left: 4px solid #d7827e;
+    padding: 10px 15px;
+    margin: 15px 0px;
+    color: #797593;
+}
+
+blockquote > :first-child {
+    margin-top: 10px;
+}
+
+blockquote > :last-child {
+    margin-bottom: 10px;
 }
 
 .wrapper {
@@ -75,6 +90,10 @@ h1 {
 
 h2 {
     margin: 20px 0;
+}
+
+h3 {
+    margin: 15px 0;
 }
 
 p {

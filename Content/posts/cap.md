@@ -1,6 +1,6 @@
 ---
 date: 2022-03-23 16:55
-description: Khi thiết kế hệ thống phân tán (distributed system) có một định lý nền tảng quan trọng đó là CAP theorem. Trong bài viết này chúng ta cùng tìm hiểu về các khía cạnh này của định lý này 
+description: Khi thiết kế hệ thống phân tán (distributed system) có một định lý nền tảng quan trọng đó là CAP theorem. Trong bài viết này chúng ta cùng tìm hiểu về các khía cạnh này của định lý này. 
 tags: Vietnamese, Distributed-system
 ---
 
@@ -12,20 +12,27 @@ Khi nhắc tới các hệ thống phân tán (distributed system) có một đ�
 
 Định lý CAP nói rằng (ở đây xin trích dẫn nguyên văn tiếng Anh)
 
->It is impossible for a web service to provide the following three guarantees:
-> * Consistency
-> * Availability
-> * Partition-tolerance
 
-Nhưng thuộc tính trên consistency, availability, partition-tolerance là những yếu tố mà khi xây dựng một hệ thống phần mềm thực tế đều hướng đến. Vậy trước tiên ta cần hiểu rõ các khái niệm này
+<blockquote>
+It is impossible for a web service to provide the following three guarantees:<br>
+- Consistency <br>
+- Availability <br>
+- Partition-tolerance <br>
+</blockquote>
+
+
+Những thuộc tính trên: consistency, availability, partition-tolerance là những yếu tố mà khi xây dựng một hệ thống phần mềm thực tế đều hướng đến. Vậy trước tiên ta cần hiểu rõ các khái niệm này.
 
 ### 1.1 Consistency
+
 Consistency ở đây nói đến việc khi một request được gửi tới một hệ tống phân tán thì nó phải được phản hồi ngay lập tức bởi một giá trị nào đó. Và quan trọng hơn là kết quả khi thực một request để đọc dữ liệu ngay sau khi kết thúc việc ghi dữ liệu phải đảm bảo việc lấy ra dữ liệu vừa được ghi thay vì các dữ liệu trước đó (stale data). Hay hiểu đơn giản trong một hệ thống database gồm n nodes, thì sau khi hoàn tất việc ghi dữ liệu ở bất kỳ node nào, thì việc đọc dữ liệu ở tất cả các node đều cho ra một kết quả giống nhau và là chính là dữ liệu được ghi thành công sau cùng.
 
 ### 1.2 Availability
+
 Tính khả dụng định nghĩa rằng với bất kỳ request nào được nhận bởi một node đang hoạt động trong hệ thống phải trả về một response tương ứng, điều đó có nghĩa tất cả mọi giải thuật và process bên trọng đều phải kết thúc vào một thời điểm nào đó (eventually terminate) cho dù gặp phải vấn đề gì.
 
 ### 1.3 Partition-tolerance
+
 Thuộc tính này là điều kiện đảm bảo cho hai đăc tính trên trong hệ thống phân tán. Partition-tolerance nói rằng khi có một phần hệ thống bị sập thì hệ thống vẫn có thể trả về kết quả cho một request tương ứng. Điều cho phép việc các message được truyền tải giữa các phần (các nodes) có thể bị mất (lost) hoặc bị trì hoàn (delayed) 
 
 ### Read more
