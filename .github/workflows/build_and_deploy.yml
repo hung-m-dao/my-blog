@@ -1,16 +1,19 @@
 name: CI
-on: push
+on:
+  push:
+  pull_request_target:
+    types:
+      - closed
 jobs:
-  deploying:
+  myjob:
     if: github.event.pull_request_target.merged == true || github.event_name == 'push'
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
-      #Checkout branch
-        uses: actions/checkout@v2
-      - name: Install Publish
-        run: brew install publish
-      - uses: webfactory/ssh-agent@v0.5.4
-                with:
-                    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Build and deploy
-        run: publish deploy
+      uses: actions/checkout@v2
+    - name: Install Publish
+      run: brew install publish
+    - uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Build and deploy
+      run: publish deploy
