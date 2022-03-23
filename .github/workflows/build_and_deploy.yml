@@ -7,7 +7,9 @@ on:
 jobs:
   myjob:
     name: Build and Deploy
-    if: github.event.pull_request_target.merged == true || github.event_name == 'push'
+    if: |
+      github.event.pull_request_target.merged == true || 
+      github.event_name == 'push'
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
