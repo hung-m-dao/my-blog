@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  name: Deploy
+
+  runs-on: macOS-latest
+  steps:
+    #Checkout branch
+      uses: actions/checkout@v2
+    - name: Install Publish
+      run: brew install publish
+    - uses: webfactory/ssh-agent@v0.5.4
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Build and deploy
+      run: publish deploy
