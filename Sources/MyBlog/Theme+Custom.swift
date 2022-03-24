@@ -53,7 +53,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
             .body {
                 SiteHeader(context: context, selectedSelectionID: section.id, location: section)
                 Wrapper {
-                    H1(section.title)
+                    H1("\(section.title)'s posts")
                     ItemList(items: section.items, site: context.site)
                 }
                 SiteFooter()
@@ -170,9 +170,18 @@ private struct SiteHeader<Site: Website>: Component {
     var body: Component {
         Header {
             Wrapper {
-                Link("/home", url: "/")
+                Span("/").class("site-name")
+                Link("home", url: "/")
                     .class("site-name")
-                Span(location.path.absoluteString).class("site-path")
+                if let sectionID = selectedSelectionID, let section = context.sections[sectionID], let path = section.path.absoluteString, let resource = location.path.absoluteString.dropFirst(section.title.count + 1) {
+                    Span("/").class("site-path")
+                    Link("\(section.title.lowercased())", url: path).class("site-path")
+                    Span("\(resource)").class("site-path")
+                } else {
+                    if (location.path.absoluteString != "/") {
+                        Span(location.path.absoluteString).class("site-path")
+                    }
+                }
                 if Site.SectionID.allCases.count > 1 {
                     navigation
                 }

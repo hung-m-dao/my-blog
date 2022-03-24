@@ -72,12 +72,21 @@ nav {
 
 nav li {
     display: inline-block;
-    margin: 0 7px;
     line-height: 1.5em;
+    color: #e0def4;
+    padding: 4px 2px;
+    border-radius: 6px;
+}
+
+nav li a {
+    margin: 0px 5px;
+    padding: 4px 6px;
 }
 
 nav li a.selected {
-    text-decoration: underline;
+    background-color: #ebbcba;
+    color: #575279;
+    border-radius: 6px;
 }
 
 h1 {
@@ -110,7 +119,7 @@ a:visited {
 }
 
 a:hover {
-  text-decoration: underline;
+  opacity: 0.8;
 }
 
 .description {
@@ -148,7 +157,7 @@ a:hover {
     background-color: #d7827e;
     color: #ffffff;
     padding: 4px 6px;
-    border-radius: 5px;
+    border-radius: 6px;
     margin-right: 5px;
 }
 
