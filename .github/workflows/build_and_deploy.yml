@@ -1,9 +1,13 @@
 name: CI
 on:
   push:
+    branches: 
+      - master
   pull_request_target:
     types:
       - closed
+    branches:
+      - master
 jobs:
   myjob:
     name: Build and Deploy
