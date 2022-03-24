@@ -11,8 +11,7 @@ Giống như các ngôn ngữ lập trình khác, nơi mà chúng ta đều có 
 Để định nghĩa chính xác interface là gì không hề dễ, đây là một khái niệm gây confuse và được mô tả khác nhau ở các ngôn ngữ. Nhưng nó vẫn dựa trên một nền tảng chung nó là một kiểu thể hiện sự tổng quát hóa và trừu tượng hóa dựa trên các hành vi của các kiểu khác. Để hiểu rõ hơn ở đây mình sẽ dùng interface ở trong Java và Duck Typing trong python để làm rõ vấn đề ở trên ở mức độ ngôn ngữ
 
 ### 1.1 Java Interface là Explicit Interface
-``` java
-
+```java
 public interface Writer {
     void write(String data);
 }
@@ -41,7 +40,6 @@ public static void main(String[] args) {
     Client client = new Client(writer);
     client.program();
 }
-
 ```
 
 * Trong Java khi một class muốn hiện thực một interface, thì cần phải đặc tả một cách “explicit" interface mà class đó muốn hiện thực. 
