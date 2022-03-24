@@ -12,7 +12,10 @@ public extension Theme {
     static var custom: Self {
         Theme(
             htmlFactory: CustomHTMLFactory(),
-            resourcePaths: ["/Sources/MyBlog/styles.css"]
+            resourcePaths: [
+                "/Sources/MyBlog/styles.css",
+                "/Sources/MyBlog/code-styles.css"
+            ]
         )
     }
 }
@@ -22,7 +25,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: index, on: context.site),
+            .headTag(for: index, on: context.site),
             .body {
                 SiteHeader(context: context, selectedSelectionID: nil, location: index)
                 Wrapper {
@@ -46,7 +49,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                          context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: section, on: context.site),
+            .headTag(for: section, on: context.site),
             .body {
                 SiteHeader(context: context, selectedSelectionID: section.id, location: section)
                 Wrapper {
@@ -62,7 +65,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: item, on: context.site),
+            .headTag(for: item, on: context.site),
             .body(
                 .class("item-page"),
                 .components {
@@ -70,8 +73,10 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                     Wrapper {
                         Article {
                             Div(item.content.body).class("content")
-                            Span("Tagged with: ")
-                            ItemTagList(item: item, site: context.site)
+                            if (!item.tags.isEmpty) {
+                                Span("Tags: ")
+                                ItemTagList(item: item, site: context.site)
+                            }
                         }
                     }
                     SiteFooter()
@@ -84,7 +89,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .headTag(for: page, on: context.site),
             .body {
                 SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper(page.body)
@@ -97,7 +102,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                          context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .headTag(for: page, on: context.site),
             .body {
                 SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper {
@@ -121,7 +126,7 @@ private struct CustomHTMLFactory<Site: Website>: HTMLFactory {
                             context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .headTag(for: page, on: context.site),
             .body {
                 SiteHeader(context: context, selectedSelectionID: nil, location: page)
                 Wrapper {
@@ -230,3 +235,36 @@ private struct SiteFooter: Component {
         }
     }
 }
+
+public extension Node where Context == HTML.DocumentContext {
+    static func headTag<T: Website>(for location: Location, on site: T) -> Node {
+//        return head(for: location, on: site, stylesheetPaths: )
+        let stylesheetPaths: [Path] = ["styles.css", "code-styles.css"]
+        
+        var title = location.title
+        if title.isEmpty {
+            title = site.name
+        }
+        
+        var description = location.description
+
+        if description.isEmpty {
+            description = site.description
+        }
+        return .head(.script(.src("/prism.js")),
+                     .encoding(.utf8),
+                     .siteName(site.name),
+                     .url(site.url(for: location)),
+                     .title(title),
+                     .description(description),
+                     .twitterCardType(location.imagePath == nil ? .summary : .summaryLargeImage),
+                     .forEach(stylesheetPaths, { .stylesheet($0) }),
+                     .viewport(.accordingToDevice),
+                     .unwrap(site.favicon, { .favicon($0) }),
+                     .unwrap(location.imagePath ?? site.imagePath, { path in
+                         let url = site.url(for: path)
+                         return .socialImageLink(url)
+                     }))
+    }
+}
+

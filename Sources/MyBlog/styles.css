@@ -10,13 +10,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'lato', sans-serif;
 }
 
 body {
     background: #faf4ed;
     color: #575279;
     text-align: center;
+    font-family: 'lato', sans-serif;
 }
 
 blockquote {

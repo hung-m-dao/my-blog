@@ -18,8 +18,11 @@ struct MyBlog: Website {
     var name = "My blog"
     var description = "Hello! I'm Hung, and this is my personal space."
     var language: Language { .english }
-    var imagePath: Path? { nil }
+    var imagePath: Path? = "images/me.jpg"
 }
 
 // This will generate your website using the built-in Foundation theme:
-try MyBlog().publish(withTheme: .custom, deployedUsing: .gitHub("hung-m-dao/hung-m-dao.github.io"))
+try MyBlog().publish(
+        withTheme: .custom,
+        deployedUsing: .gitHub("hung-m-dao/hung-m-dao.github.io")
+    )
