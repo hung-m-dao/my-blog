@@ -21,8 +21,8 @@ body {
 
 blockquote {
     border-left: 4px solid #d7827e;
-    padding: 10px 15px;
-    margin: 15px 0px;
+    padding: 5px 15px;
+    margin: 10px 0px;
     color: #797593;
     font-family: 'open-sans', sans-serif;
 }
@@ -104,6 +104,15 @@ h3 {
 
 hr {
     margin: 15px 0;
+}
+
+ul {
+    list-style-type: square;
+    margin: 15px;
+}
+
+blockquote ul {
+    margin: 0px 25px;
 }
 
 p {
@@ -191,4 +200,33 @@ a:hover {
 
 footer {
     color: #9893a5;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+td {
+  vertical-align: top;
+}
+
+table th {
+  font-weight: 700;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
 }
