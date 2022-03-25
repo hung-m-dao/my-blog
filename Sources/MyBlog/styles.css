@@ -106,9 +106,13 @@ hr {
     margin: 15px 0;
 }
 
-ul {
+article ul {
     list-style-type: square;
-    margin: 15px;
+    margin: 20px;
+}
+
+.tag-list, .item-list {
+    margin: 0;
 }
 
 blockquote ul {
@@ -123,6 +127,9 @@ a {
     color: inherit;
 }
 
+article .content a{
+    color: #b4637a;
+}
 a:link {
   text-decoration: none;
 }
@@ -229,4 +236,10 @@ table tr {
 
 table tr:nth-child(2n) {
   background-color: #f8f8f8;
+}
+
+img {
+    border-style: none;
+    max-width: 100%;
+    box-sizing: content-box;
 }
