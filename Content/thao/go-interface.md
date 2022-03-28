@@ -1,7 +1,7 @@
 ---
 date: 2022-03-24 16:55
 description: Go interface - The distinction makes the power and grace of Go
-tags: Vietnamese, golang, go, go-interface, interface, duck-typing java, python, programing-languages, thao-posts
+tags: Vietnamese, go, interface, duck-typing java, thao-posts
 ---
 # GO INTERFACE
 
