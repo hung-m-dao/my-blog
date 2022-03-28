@@ -149,4 +149,4 @@ Trong bài này mình đã giới thiệu sơ lược về Go Interface và đ�
 
 [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)
 
-[SOLID - Dependency inversion principle](https://en.wikipedia.org/wiki/SOLID)``
+[SOLID - Dependency inversion principle](https://en.wikipedia.org/wiki/SOLID)
