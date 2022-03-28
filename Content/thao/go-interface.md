@@ -112,7 +112,7 @@ func (f *FileWriter) write(data string) {
 }
 
 type Client struct {
-    writer *Writer
+    writer Writer
 }
 
 func (c *Client) program() {
@@ -128,8 +128,50 @@ func main() {
 ```
 Nhìn thoáng qua phần hiện thực ở trên có ý tưởng gần giống Java, nhưng có một điểm khác biệt quan trọng là có vẻ `FileWriter` chính là kiểu đang hiện thực `Writer` interface nhưng lại không hề có sự xuất hiện của keyword **`implements`** . Và chính xác `FileWriter` đang hiện thực `Writer` interface như mọi người nghĩ, điều này nói lên Interface trong Go là **Implicit Interface** tức là một kiểu rời rạc (concrete type - theo cách gọi của Go) khi hiện thực bất kỳ interface nào thì không cần chỉ ra cụ thể interface mà nó hiện thực. Chính vì thế một concrete type T được xem như đang hiện thực một interface I chỉ cần thỏa điều kiện là T đang sở hữu các hàm (implementation) mà I đã định nghĩa mà không cần biết đến sự có mặt của I.
 
+*Khi cần thêm một writer mới*
+```go
+type ProtoFileWriter struct {}
+
+func (f *ProtoFileWriter) write(data string) {
+    // write string data to .proto file
+}
+
+func main() {
+    fileWriter := FileWriter{}
+    client := Client{writer: &fileWriter}
+    client.program()
+
+    // for .proto file
+    protoFileWriter := ProtoFileWriter{}
+    client = Client{writer: &protoFileWriter} 
+    client.program()
+}
+```
+
+
 Quay lại đoạn code ở trên, nếu ta bỏ qua phần định nghĩa interface `Writer` thì ta có thể thấy phần còn lại rất giống phần ví dụ bằng code Python ở phần trước. Cách triển khai đang thể hiện rất rõ ý tưởng của Duck Typing nhưng lại có một ưu điểm so với cách dùng ở các ngôn ngữ kiểu động nằm ở việc đảm bảo `writer` được truyền vào `Client` vẫn thuộc interface `Writer`, điều mà Python hay các ngôn ngữ kiểu động không làm được ở thời điểm compile. Đó là lý do tại sao Interface của Go cũng có thể được xem là **Type-Safe Duck Typing**, người sử dụng sẽ luôn biết chính xác mình đang có trong tay những thứ mình thật sự mong muốn như cách mà các ngôn ngữ kiểu tĩnh hoạt động thay vì là sự mơ hồ ở các ngôn ngữ kiểu động.
 
+*Khi kiểu không thuộc interface type sẽ báo lỗi tại thời điểm complie*
+```go
+type OtherProtoFileWriter struct {}
+
+func (f *OtherProtoFileWriter) writeToProto(data string) {
+    // write string data to .proto file
+}
+
+func main() {
+    fileWriter := FileWriter{}
+    client := Client{writer: &fileWriter}
+    client.program()
+
+    protoFileWriter := ProtoFileWriter{}
+    // Cannot use '&protoFileWriter' (type *OtherProtoFileWriter) as 
+    // the type Writer Type does not implement 'Writer' as some 
+    // methods are missing: write(data string)
+    client = Client{writer: &protoFileWriter} 
+    client.program()
+}
+```
 ### 2.2 Interface dưới góc nhìn của Go
 Ở phần trước mình đã làm rõ tại sao Go Interface lại được xem như là một  **Implicit Interface** hay **Type-Safe Duck Typing** nhưng chưa có một định nghĩa rõ ràng, nên trong phần mình sẽ nói sâu thêm về Interface dưới góc nhìn của chính nó (Go).
 
