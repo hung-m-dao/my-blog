@@ -183,7 +183,7 @@ private struct SiteHeader<Site: Website>: Component {
                     }
                 }
                 if Site.SectionID.allCases.count > 1 {
-                    navigation
+                    //navigation
                 }
             }
         }
