@@ -1,7 +1,7 @@
 ---
 date: 2022-03-24 16:55
 description: Go interface - The distinction makes the power and grace of Go
-tags: Vietnamese, golang, interface, thao-posts
+tags: Vietnamese, golang, interface, duck-typing, thao-posts
 ---
 # GO INTERFACE
 
@@ -164,8 +164,8 @@ func main() {
     client := Client{writer: &fileWriter}
     client.program()
 
-    protoFileWriter := ProtoFileWriter{}
-    // Cannot use '&protoFileWriter' (type *OtherProtoFileWriter) as 
+    protoFileWriter := OtherProtoFileWriter{}
+    // Error: Cannot use '&protoFileWriter' (type *OtherProtoFileWriter) as 
     // the type Writer Type does not implement 'Writer' as some 
     // methods are missing: write(data string)
     client = Client{writer: &protoFileWriter} 
