@@ -1,5 +1,5 @@
 ---
-date: 2022-03-24 16:55
+date: 2022-04-02 17:35
 description: Concurrecny Problems - Race condition 
 tags: Vietnamese, golang, race-condition, concurrency, thao-posts
 ---
