@@ -1,6 +1,6 @@
 ---
 date: 2022-04-02 17:35
-description: Concurrecny Problems - Race condition 
+description: Concurrency Problems - Race condition 
 tags: Vietnamese, golang, race-condition, concurrency, thao-posts
 ---
 # Race condition là gì ?
@@ -34,7 +34,7 @@ func main() {
 Trong đoạn code trên mình có sử dụng một số utilities của `sync` package để giúp cho việc mô phỏng diễn ra chính xác. Vì hàm main (entry point của bất kỳ application nào trong Go) cũng là một Gorountine và một khi nó kết thúc thì tất cả các Gorountine khác cũng bị drop nên `w.Wait()` xuất hiện ở đây đề giúp cho `main` chờ các Gorountine khác kết thúc trước khi nó kết thúc. `w.Add()` được gọi trong main Goroutine để thêm vào số lượng Goroutine mà nó cần chờ, ở đây là 1000 Goroutines. Sau khi hoàn thành công việc thì Goroutine sẽ signal cho main Gorountine bằng việc gọi hàm `w.Done()` mà ta có thể thấy trong `add_to_cart` qua câu lệnh `defer w.Done()`, [defer](https://go.dev/tour/flowcontrol/12) là một keyword trong Go dùng để nói với hàm sở hữu nó thực hiện câu lệnh ngay sau keyword `defer` tại thời điểm kết thúc.
 
 ### Kết quả và giải thích
-```
+```shell
 Current stock:  93
 Current stock:  32
 Current stock:  114
@@ -45,14 +45,14 @@ Current stock:  6
 Sau khi tiến hành thực thi chương trình ở trên 5 lần chúng ta nhận được 5 kết quả khác nhau và không có kết quả nào đúng như kết quả mà ta mong muốn là số lượng stock còn lại là 0. Vậy tại sao kết quả lại như vậy ?
 
 Trong phần định nghĩa có nói kết quả của quá trình thực thi sẽ phụ thuộc vào thứ tự mà việc truy cập vào vùng nhớ chung diễn ra. Ta cần biết rằng các Gorountine sẽ được thực thi theo một thứ tự mà ta không thể kiểm soát, mà nó được quyết định bởi runtime scheduler của Go cũng tương tư thread ở level OS  sẽ được quyết định bởi OS scheduler. Việc này dẫn tới tại một thời điểm các Goruntine được thực thi cùng lúc với nhau dẫn đến việc biến `stock` được truy cập cùng lúc. Đây cũng là nguyên nhân dẫn tới việc biến `stock` bị tính toán sai mà ở đây một cách chi tiết là qua câu lệnh `stock--`. Vậy ta cùng nhìn sâu hơn ở low-level cuả câu lệnh `stock--`, ở mức độ ngôn ngữ máy, nó được thực hiện như sau
-```
+```shell
 register = stock
 register = register - 1
 stock = register
 ```
 Giá trị từ biến `stock` sẽ được đọc và ghi xuống thanh ghi, sau đó tiến hành tính toán bởi CPU và được ghi lại vào biến `stock`. Điều này dẫn đến việc khi hai hay nhiều truy cập đồng thời vào biến stock thì giá trị tương ứng của `stock` sẽ được ghi vào nhiều thanh ghi khác nhau với cùng một giá trị, vì thế làm cho giá trị của `stock` bị tính toán sai. Ví dụ ta có 3 Gorountines cùng truy cập vùng nhớ của `stock` và thực thi phép toán, thì lúc này giá trị của `stock` thay vì cần giảm 3 đơn vị thì nó chỉ giảm 1.
 
-```
+```shell
 Goroutine1: stock-- =>  register1 = stock (stock=1)
                         register1 = register1 - 1
                         stock = register1 (stock = 0)
