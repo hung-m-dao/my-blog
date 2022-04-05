@@ -75,7 +75,7 @@ func main() {
 Trong ví dụ trên minh đã sử dụng hàm `main` một web server đang gọi request tới 2 service khác nhau trong hệ thống để lấy data bằng việc sử dụng 2 Goroutine và 2 unbuffered channel tương ứng. Do để giống với request thật nên mình đã dùng hàm `wait()` tương ứng với việc mỗi request cần tốn thời gian để xử lý I/O mà ở đây thời gian sẽ được random với mỗi requets trong khoảng từ 1 đến 30 miliseconds. Chương trình sẽ kết thúc khi tất cả request (được đặc tả bằng `TARGET_COUNT`) được cả hai Gorountine handle xong, một điều quan trọng trong ví dụ trên mình không dùng `select` để handle việc đọc dữ liệu ở các channel. Vậy nếu dùng select thì nó sẽ ra sao ?
 
 ```go
-// with 
+// with select
 	for {
 		if count1 == TARGET_COUNT && count2 == TARGET_COUNT {
 			break
