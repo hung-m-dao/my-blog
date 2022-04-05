@@ -1,7 +1,7 @@
 ---
 date: 2022-04-05 14:55
 description: Go Concurrency - Select statement
-tags: Vietnamese, golang, select, concurrency thao-posts
+tags: Vietnamese, golang, select, concurrency, thao-posts
 ---
 # Go Concurrency - Select Statement
 Câu lệnh `select` trong Go có thể được xem là một trong những câu lệnh quan trọng mà Gopher cần phải nắm rõ khi làm việc với concurrency programing. Nó được xem như chất kết dính gắn kết các channel lại với nhau, đồng thời từ đó kiểm soát và giải quyết những vấn đề phổ biến trong mô hình concurrency của Go.
