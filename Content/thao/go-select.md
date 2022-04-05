@@ -87,7 +87,7 @@ Trong ví dụ trên minh đã sử dụng hàm `main` một web server đang g�
 	}
 ```
 
-Và sau khi chạy chương trình trên thì ta được thời gian thực thi tương ứng cho việc không dùng và có dùng `select` như sau 
+Và sau khi chạy chương trình trên thì ta được thời gian thực thi tương ứng cho việc không dùng và có dùng `select` như sau
 
 ```shell
 Req(TARGET_COUNT)   with_select     without_select 
