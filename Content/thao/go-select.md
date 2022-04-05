@@ -178,7 +178,7 @@ loop:
     }
 ```
 ### 2.4 Một số lưu ý khác 
-* Câu lệnh `select` cũng cho phép chúng ta gán giá trị tại từng case có chứa recieve statement bằng "short variable declaration" ví dụ `case s := <-chan1`, lúc này giá trị được đọc từ `chan1` sẽ được gán cho biến `s`
+* Câu lệnh `select` cũng cho phép chúng ta gán giá trị tại từng case có chứa recieve statement bằng "short variable declaration" ví dụ `case s := <-chan1`, lúc này giá trị được đọc từ `chan1` sẽ được gán cho biến `s`.
 * Ngoài ra chúng ta cũng được Go cung cấp cấp câu lệnh select rỗng `select{}`, nó đơn giản là block Gorountine tương ứng mãi mãi và chỉ kết thúc khi có sự can thiêp bên ngoài. Trong những bài viết kế tiếp về Concurrency trong Go, chúng ta sẽ cùng nhau tìm hiểu kỹ hơn về nó. 
 ## 3. Kết
 Qua bài viết này mình đã giới thiệu những khái niệm và cách sử dụng cơ bản về câu lệnh `select` của Go, một trong những chất liệu quan trọng của mô hình Concurrency của Go
