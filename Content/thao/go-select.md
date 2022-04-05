@@ -157,7 +157,6 @@ Time elapsed:  1.001240483s
 ```
 `time.Afetr()` sẽ trả về một read channel sau một khoảng thời gian được truyền vào, ta sẽ dùng nó làm một nhánh lựa chọn trong `select` để đảm bảo việc timeout của các channel.
 
-
 ### 2.3 Khi chúng ta muốn tận dụng thời gian mà tất cả các đều channel đang bận
 Đây là lúc `default` xuất hiện, gần giống với `switch`, `default` branch sẽ dược thực thi khi tất cả các channel bị block.
 ```go
