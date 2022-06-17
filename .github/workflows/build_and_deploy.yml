@@ -17,11 +17,14 @@ jobs:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install Publish
-      run: brew install publish
     - uses: webfactory/ssh-agent@v0.5.4
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Install Publish
+      run: |
+        git clone git@github.com:hung-m-dao/my-publish.git
+        cd my-publish
+        make
     - name: Generate HTML
       run: publish generate
     - name: Deploy
