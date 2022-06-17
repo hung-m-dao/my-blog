@@ -87,7 +87,7 @@ Trong ví dụ trên minh đã sử dụng hàm `main` một web server đang g�
 	}
 ```
 
-Và sau khi chạy chương trình trên thì ta được thời gian thực thi tương ứng cho việc không dùng và có dùng `select` như sau 
+Và sau khi chạy chương trình trên thì ta được thời gian thực thi tương ứng cho việc không dùng và có dùng `select` như sau
 
 ```shell
 Req(TARGET_COUNT)   with_select     without_select 
@@ -157,7 +157,6 @@ Time elapsed:  1.001240483s
 ```
 `time.Afetr()` sẽ trả về một read channel sau một khoảng thời gian được truyền vào, ta sẽ dùng nó làm một nhánh lựa chọn trong `select` để đảm bảo việc timeout của các channel.
 
-
 ### 2.3 Khi chúng ta muốn tận dụng thời gian mà tất cả các đều channel đang bận
 Đây là lúc `default` xuất hiện, gần giống với `switch`, `default` branch sẽ dược thực thi khi tất cả các channel bị block.
 ```go
@@ -178,7 +177,7 @@ loop:
     }
 ```
 ### 2.4 Một số lưu ý khác 
-* Câu lệnh `select` cũng cho phép chúng ta gán giá trị tại từng case có chứa recieve statement bằng "short variable declaration" ví dụ `case s := <-chan1`, lúc này giá trị được đọc từ `chan1` sẽ được gán cho biến `s`
+* Câu lệnh `select` cũng cho phép chúng ta gán giá trị tại từng case có chứa recieve statement bằng "short variable declaration" ví dụ `case s := <-chan1`, lúc này giá trị được đọc từ `chan1` sẽ được gán cho biến `s`.
 * Ngoài ra chúng ta cũng được Go cung cấp cấp câu lệnh select rỗng `select{}`, nó đơn giản là block Gorountine tương ứng mãi mãi và chỉ kết thúc khi có sự can thiêp bên ngoài. Trong những bài viết kế tiếp về Concurrency trong Go, chúng ta sẽ cùng nhau tìm hiểu kỹ hơn về nó. 
 ## 3. Kết
 Qua bài viết này mình đã giới thiệu những khái niệm và cách sử dụng cơ bản về câu lệnh `select` của Go, một trong những chất liệu quan trọng của mô hình Concurrency của Go
